@@ -73,6 +73,10 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 			this, &AMyCharacter::Run);
 		EnhancedInputComponent->BindAction(IA_Run, ETriggerEvent::Completed,
 			this, &AMyCharacter::RunStop);
+		EnhancedInputComponent->BindAction(IA_Crouch, ETriggerEvent::Triggered,
+			this, &AMyCharacter::DoCrouch);
+		EnhancedInputComponent->BindAction(IA_Dead, ETriggerEvent::Triggered,
+			this, &AMyCharacter::DoDead);
 	}
 }
 
@@ -103,13 +107,29 @@ void AMyCharacter::Jump()
 
 void AMyCharacter::Run()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 800.f;
+	
 }
 
 void AMyCharacter::RunStop()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 600.f;
+	
 }
 
+void AMyCharacter::DoCrouch(const FInputActionValue& Value)
+{
+	if (CanCrouch())
+	{
+		Crouch();
+	}
+	else
+	{
+		UnCrouch();
+	}
+}
 
-
+void AMyCharacter::DoDead(const FInputActionValue& Value)
+{
+	FString SectionName = FString::Printf(TEXT("Death%d"), FMath::RandRange(1, 3));
+	PlayAnimMontage(AnimMontage, 1.0f, FName(*SectionName));
+	// FString에서 FName으로 변환 시 TestHUDName = FName(*TestHUDString) 이런 식으로.
+}

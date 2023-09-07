@@ -18,5 +18,17 @@ public:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State")
-	double Speed;
+	float Speed;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State")
+	float Direction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State")
+	float AinYaw;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State")
+	float AimPitch;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State")
+	uint32 bIsCrouch:1;
 };

@@ -52,11 +52,22 @@ public:
 	UInputAction* IA_Jump;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* IA_Crouch;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputAction* IA_MoveForwardLeftRight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* IA_Dead;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dead")
+	class UAnimMontage* AnimMontage;
 
 	void Look(const FInputActionValue& Value);
 	void MoveForwardLeftRight(const FInputActionValue& Value);
 	void Jump();
 	void Run();
 	void RunStop();
+	void DoCrouch(const FInputActionValue& Value);
+	void DoDead(const FInputActionValue& Value);
 };
